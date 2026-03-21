@@ -9,32 +9,32 @@
 :root{
   --yellow:#FFD93D;--pink:#FF6B9D;--blue:#4ECDC4;--purple:#A29BFE;
   --orange:#FF8C42;--green:#6BCB77;--red:#FF4757;
-  --bg:#0D1117;--card:#161B22;--card2:#1C2333;--card3:#21262D;
+  --bg:#0D1117;--card:#161B22;--card2:#1C2333;
   --text:#F0F6FC;--text2:#8B949E;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;
-  background:radial-gradient(ellipse at 15% 15%,rgba(162,155,254,.1) 0%,transparent 55%),
-             radial-gradient(ellipse at 85% 85%,rgba(78,205,196,.07) 0%,transparent 55%);
+  background:radial-gradient(ellipse at 20% 20%,rgba(162,155,254,.1) 0%,transparent 55%),
+             radial-gradient(ellipse at 80% 80%,rgba(78,205,196,.07) 0%,transparent 55%);
   pointer-events:none;z-index:0;}
 .screen{display:none;position:relative;z-index:1;min-height:100vh;}
 .screen.active{display:flex;flex-direction:column;}
 .stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .star{position:absolute;background:white;border-radius:50%;animation:twinkle 3s infinite;}
-@keyframes twinkle{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:.8;transform:scale(1.3)}}
+@keyframes twinkle{0%,100%{opacity:.12;transform:scale(1)}50%{opacity:.7;transform:scale(1.3)}}
 
-/* BUTTONS */
+/* ── BUTTONS ── */
 .btn{font-family:'Fredoka One',cursive;font-size:1rem;border:none;border-radius:50px;padding:12px 24px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
 .btn:active{transform:scale(.95);}
 .btn-primary{background:linear-gradient(135deg,var(--yellow),var(--orange));color:#0D1117;box-shadow:0 5px 18px rgba(255,140,66,.35);}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,140,66,.5);}
+.btn-primary:hover{transform:translateY(-2px);}
 .btn-secondary{background:linear-gradient(135deg,var(--purple),var(--blue));color:white;}
 .btn-danger{background:linear-gradient(135deg,#ff6b6b,var(--red));color:white;}
 .btn-sm{padding:8px 16px;font-size:.88rem;}
 .w-full{width:100%;}
 
-/* ========================= WELCOME ========================= */
+/* ── WELCOME ── */
 #screen-welcome{align-items:center;justify-content:flex-start;padding:16px 16px 32px;gap:14px;text-align:center;overflow-y:auto;}
 .logo-area{animation:float 3s ease-in-out infinite;flex-shrink:0;padding-top:8px;}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
@@ -81,45 +81,45 @@ body::before{content:'';position:fixed;inset:0;
 .cat-btn[data-cat="superheroes"].selected{color:#A29BFE;background:rgba(162,155,254,.18);border-color:#A29BFE;}
 .cat-btn[data-cat="viajes"].selected{color:#FFD93D;background:rgba(255,217,61,.12);border-color:#FFD93D;}
 
-/* ========================= BOARD ========================= */
+/* ── BOARD SCREEN ── */
 #screen-board{padding:0;overflow:hidden;}
 .board-header{background:var(--card);padding:8px 13px;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.05);flex-shrink:0;gap:10px;}
 .bh-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;}
-.bh-name{font-weight:800;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px;}
+.bh-name{font-weight:800;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;}
 .bh-hint{font-size:.68rem;color:var(--text2);}
-.timer-display{display:flex;align-items:center;gap:5px;background:var(--card2);padding:7px 11px;border-radius:50px;font-family:'Fredoka One',cursive;font-size:.9rem;white-space:nowrap;}
+.timer-display{display:flex;align-items:center;gap:5px;background:var(--card2);padding:7px 11px;border-radius:50px;font-family:'Fredoka One',cursive;font-size:.9rem;white-space:nowrap;margin-left:auto;}
 .timer-display.warning{color:var(--red);animation:pulse .5s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-.board-area{flex:1;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
-#boardCanvas{display:block;touch-action:none;}
-.dice-panel{background:var(--card);border-top:1px solid rgba(255,255,255,.05);padding:9px 14px;display:flex;align-items:center;gap:11px;flex-shrink:0;}
-.dice-btn{width:60px;height:60px;border-radius:15px;background:linear-gradient(135deg,#fff,#eee);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:all .25s;box-shadow:0 4px 14px rgba(0,0,0,.5);flex-shrink:0;color:#1a1a1a;}
-.dice-btn:hover{transform:scale(1.07);}
-.dice-btn.rolling{animation:diceRoll .45s ease;}
-.dice-btn.used{opacity:.4;cursor:not-allowed;}
-@keyframes diceRoll{0%{transform:rotate(0)}30%{transform:rotate(-20deg) scale(1.12)}60%{transform:rotate(18deg) scale(1.12)}100%{transform:rotate(0) scale(1)}}
-.dice-num{font-family:'Fredoka One',cursive;font-size:2.2rem;color:var(--yellow);min-width:38px;text-align:center;}
-.dice-info{flex:1;min-width:0;}
-.dice-info .dn{font-family:'Fredoka One',cursive;font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.dice-info .dh{font-size:.73rem;color:var(--text2);margin-top:2px;}
-.mini-scores{position:absolute;top:7px;right:7px;display:flex;flex-direction:column;gap:4px;z-index:5;}
-.ms-item{background:rgba(10,14,20,.82);border-radius:9px;padding:4px 8px;display:flex;align-items:center;gap:5px;border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(8px);}
+
+/* Board is an SVG overlay on top of canvas */
+.board-area{flex:1;position:relative;overflow:hidden;}
+#boardCanvas{display:block;position:absolute;inset:0;}
+
+/* Mini scores */
+.mini-scores{position:absolute;top:8px;right:8px;display:flex;flex-direction:column;gap:4px;z-index:10;}
+.ms-item{background:rgba(10,14,20,.85);border-radius:9px;padding:4px 8px;display:flex;align-items:center;gap:5px;border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(8px);}
 .ms-av{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;}
 .ms-name{font-size:.68rem;font-weight:800;max-width:52px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .ms-pts{font-family:'Fredoka One',cursive;font-size:.74rem;color:var(--yellow);}
 .ms-item.active-turn{border-color:rgba(255,217,61,.6);background:rgba(255,217,61,.1);}
 
-/* Dice direction buttons */
-.dir-btns{display:flex;gap:7px;align-items:center;}
-.dir-btn{background:var(--card2);border:2px solid rgba(255,255,255,.12);border-radius:50%;width:42px;height:42px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all .2s;color:white;font-family:'Fredoka One',cursive;}
-.dir-btn:hover{background:rgba(255,217,61,.2);border-color:var(--yellow);}
-.dir-btn:disabled{opacity:.3;cursor:not-allowed;}
+/* Dice panel */
+.dice-panel{background:var(--card);border-top:1px solid rgba(255,255,255,.05);padding:10px 14px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.dice-btn{width:62px;height:62px;border-radius:15px;background:white;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:all .25s;box-shadow:0 4px 16px rgba(0,0,0,.5);flex-shrink:0;color:#111;}
+.dice-btn:hover:not(.used){transform:scale(1.08);}
+.dice-btn.rolling{animation:diceRoll .45s ease;}
+.dice-btn.used{opacity:.35;cursor:not-allowed;}
+@keyframes diceRoll{0%{transform:rotate(0)}30%{transform:rotate(-22deg) scale(1.12)}65%{transform:rotate(18deg) scale(1.1)}100%{transform:rotate(0) scale(1)}}
+.dice-num{font-family:'Fredoka One',cursive;font-size:2.2rem;color:var(--yellow);min-width:36px;text-align:center;}
+.dice-info{flex:1;min-width:0;}
+.dice-info .dn{font-family:'Fredoka One',cursive;font-size:.96rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.dice-info .dh{font-size:.72rem;color:var(--text2);margin-top:2px;}
 
-/* ========================= QUESTION ========================= */
+/* ── QUESTION SCREEN ── */
 #screen-question{padding:0;}
 .q-header{background:var(--card);padding:9px 13px;display:flex;align-items:center;gap:9px;border-bottom:1px solid rgba(255,255,255,.05);flex-shrink:0;}
 .q-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;}
-.q-pname{font-weight:800;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.q-pname{font-weight:800;font-size:.9rem;}
 .q-pmode{font-size:.7rem;color:var(--text2);}
 .q-area{flex:1;padding:13px;display:flex;flex-direction:column;gap:11px;overflow-y:auto;}
 .q-cat{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:50px;font-size:.78rem;font-weight:800;align-self:flex-start;}
@@ -134,9 +134,9 @@ body::before{content:'';position:fixed;inset:0;
 .a-btn{background:var(--card2);border:2px solid rgba(255,255,255,.09);border-radius:13px;padding:12px 9px;color:white;font-family:'Nunito',sans-serif;font-size:.84rem;font-weight:800;cursor:pointer;transition:all .2s;text-align:center;line-height:1.3;}
 .a-btn:hover:not(:disabled){border-color:var(--purple);background:rgba(162,155,254,.13);transform:scale(1.02);}
 .a-grid-baby{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
-.a-btn-baby{background:var(--card2);border:3px solid rgba(255,255,255,.09);border-radius:18px;padding:12px 6px 10px;color:white;cursor:pointer;transition:all .2s;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:100px;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,.22);}
+.a-btn-baby{background:var(--card2);border:3px solid rgba(255,255,255,.09);border-radius:18px;padding:12px 6px 10px;color:white;cursor:pointer;transition:all .2s;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:100px;justify-content:center;}
 .a-btn-baby:hover:not(:disabled){transform:scale(1.05);}
-.a-btn-baby .aem{font-size:2.6rem;filter:drop-shadow(0 2px 5px rgba(0,0,0,.3));}
+.a-btn-baby .aem{font-size:2.6rem;}
 .a-btn-baby .albl{font-family:'Fredoka One',cursive;font-size:.82rem;color:rgba(255,255,255,.85);}
 .a-btn-baby.bc0{border-color:rgba(255,107,157,.4);background:rgba(255,107,157,.09);}
 .a-btn-baby.bc1{border-color:rgba(78,205,196,.4);background:rgba(78,205,196,.09);}
@@ -177,23 +177,25 @@ body::before{content:'';position:fixed;inset:0;
 .result-stats{font-size:.74rem;color:var(--text2);}
 .result-score{font-family:'Fredoka One',cursive;font-size:.97rem;color:var(--yellow);}
 
-/* CONFETTI */
+/* Confetti / Pause / Toast */
 .cfp{position:fixed;width:9px;height:9px;top:-10px;border-radius:2px;animation:cffall linear forwards;z-index:300;pointer-events:none;}
 @keyframes cffall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
-/* PAUSE */
 .pause-ov{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:250;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:13px;backdrop-filter:blur(10px);}
 .pause-ov h2{font-family:'Fredoka One',cursive;font-size:2rem;color:var(--yellow);}
-/* TOAST */
-.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(10,14,20,.92);border:2px solid var(--yellow);border-radius:18px;padding:16px 26px;text-align:center;z-index:150;backdrop-filter:blur(8px);animation:popIn .22s ease;pointer-events:none;}
-.toast .tn{font-family:'Fredoka One',cursive;font-size:3.2rem;color:var(--yellow);line-height:1;}
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(10,14,20,.93);border:2px solid var(--yellow);border-radius:18px;padding:16px 28px;text-align:center;z-index:150;backdrop-filter:blur(8px);animation:popIn .22s ease;pointer-events:none;}
+.toast .tn{font-family:'Fredoka One',cursive;font-size:3rem;color:var(--yellow);line-height:1;}
 .toast .tt{font-size:.88rem;color:var(--text2);margin-top:3px;}
+
+/* ── BOARD INSTRUCTION HINT ── */
+.pick-hint{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);background:rgba(255,217,61,.18);border:1px solid rgba(255,217,61,.5);border-radius:20px;padding:5px 14px;font-family:'Fredoka One',cursive;font-size:.82rem;color:var(--yellow);white-space:nowrap;z-index:10;pointer-events:none;animation:fadeIn .3s ease;}
+
 ::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:4px}
 </style>
 </head>
 <body>
 <div class="stars" id="starsContainer"></div>
 
-<!-- =================== WELCOME =================== -->
+<!-- ═══════════════ WELCOME ═══════════════ -->
 <div id="screen-welcome" class="screen active">
   <div style="padding-top:14px;">
     <div class="logo-area" style="text-align:center;">
@@ -225,7 +227,7 @@ body::before{content:'';position:fixed;inset:0;
   </div>
 </div>
 
-<!-- =================== BOARD =================== -->
+<!-- ═══════════════ BOARD ═══════════════ -->
 <div id="screen-board" class="screen">
   <div class="board-header">
     <div class="bh-av" id="bhAv"></div>
@@ -234,11 +236,12 @@ body::before{content:'';position:fixed;inset:0;
       <div class="bh-hint" id="bhHint"></div>
     </div>
     <div class="timer-display" id="timerDisplay">⏱ --:--</div>
-    <button class="btn btn-secondary btn-sm" id="pauseBtn">⏸</button>
+    <button class="btn btn-secondary btn-sm" id="pauseBtn" style="margin-left:8px;">⏸</button>
   </div>
-  <div class="board-area">
+  <div class="board-area" id="boardArea">
     <canvas id="boardCanvas"></canvas>
     <div class="mini-scores" id="miniScores"></div>
+    <div class="pick-hint" id="pickHint" style="display:none;">👆 Toca una casilla iluminada</div>
   </div>
   <div class="dice-panel">
     <button class="dice-btn" id="diceBtn">🎲</button>
@@ -247,14 +250,10 @@ body::before{content:'';position:fixed;inset:0;
       <div class="dn" id="dpName">—</div>
       <div class="dh" id="dpHint">Toca el dado para tirar</div>
     </div>
-    <div class="dir-btns" id="dirBtns" style="display:none;">
-      <button class="dir-btn" id="btnLeft" title="Ir hacia atrás">◀</button>
-      <button class="dir-btn" id="btnRight" title="Ir hacia adelante">▶</button>
-    </div>
   </div>
 </div>
 
-<!-- =================== QUESTION =================== -->
+<!-- ═══════════════ QUESTION ═══════════════ -->
 <div id="screen-question" class="screen">
   <div class="q-header">
     <div class="q-av" id="qAv"></div>
@@ -267,7 +266,7 @@ body::before{content:'';position:fixed;inset:0;
   <div class="q-area" id="qArea"></div>
 </div>
 
-<!-- =================== RESULTS =================== -->
+<!-- ═══════════════ RESULTS ═══════════════ -->
 <div id="screen-results" class="screen">
   <div style="text-align:center;">
     <div style="font-size:2.6rem;margin-bottom:4px;">🏆</div>
@@ -279,105 +278,77 @@ body::before{content:'';position:fixed;inset:0;
 </div>
 
 <script>
-/* ========================================================
+/* ════════════════════════════════════════════
    STARS
-   ======================================================== */
+   ════════════════════════════════════════════ */
 (function(){
   const c=document.getElementById('starsContainer');
   for(let i=0;i<55;i++){
     const s=document.createElement('div');s.className='star';
-    const z=Math.random()*2.2+.6;
+    const z=Math.random()*2+.5;
     s.style.cssText=`width:${z}px;height:${z}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*4}s;animation-duration:${2+Math.random()*3}s;`;
     c.appendChild(s);
   }
 })();
 
-/* ========================================================
-   CONSTANTS
-   ======================================================== */
-const AVATARS=[
-  {emoji:'🐕',bg:'#c85a00'},{emoji:'⭐',bg:'#b89000'},{emoji:'🌈',bg:'#2e7d32'},
-  {emoji:'🦋',bg:'#9c2060'},{emoji:'🚀',bg:'#4527a0'},{emoji:'🦊',bg:'#b34700'},
-];
-const ga=i=>`background:${AVATARS[i%AVATARS.length].bg}`;
-const ge=i=>AVATARS[i%AVATARS.length].emoji;
-const ft=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+/* ════════════════════════════════════════════
+   BOARD DEFINITION
+   16 outer squares (ring) + 8 inner squares (ring)
+   + 4 spoke connections between them
+   Total: 24 playable squares
 
-const CAT_DEF={
-  patrulla:{color:'#FF6B35',light:'rgba(255,107,53,.22)',emoji:'🐾',label:'Patrulla Canina'},
-  disney:  {color:'#4ECDC4',light:'rgba(78,205,196,.22)', emoji:'✨',label:'Disney'},
-  superheroes:{color:'#A29BFE',light:'rgba(162,155,254,.22)',emoji:'🦸',label:'Superhéroes'},
-  viajes:  {color:'#FFD93D',light:'rgba(255,217,61,.16)', emoji:'🌍',label:'Viajes'},
-  start:   {color:'#FFD93D',light:'rgba(255,217,61,.2)',  emoji:'🏠',label:'Salida'},
-  junction:{color:'#FF6B9D',light:'rgba(255,107,157,.2)', emoji:'🔀',label:'Cruce'},
-};
+   Layout (node indices):
+     Outer ring: 0..15   (clockwise from top)
+     Inner ring: 16..23  (clockwise from top)
+   Spokes (outer ↔ inner):
+     outer[0]  ↔ inner[0]  (top)
+     outer[4]  ↔ inner[2]  (right)
+     outer[8]  ↔ inner[4]  (bottom)
+     outer[12] ↔ inner[6]  (left)
+   ════════════════════════════════════════════ */
+const OUTER_N = 16;
+const INNER_N = 8;
+const TOTAL_N  = OUTER_N + INNER_N; // 24
 
-/* ========================================================
-   BOARD GRAPH
-   The board has 3 concentric loops connected by 2 bridges.
-   Outer ring: nodes 0-29  (30 squares)
-   Inner ring: nodes 30-47 (18 squares)
-   Bridge 1: outer[0] ↔ inner[0]  (top)
-   Bridge 2: outer[15] ↔ inner[9] (bottom)
+const CATS4 = ['patrulla','disney','superheroes','viajes'];
 
-   For simplicity we use a flat graph: each node has
-   adjacency list. Players navigate using +1/-1 on a path,
-   but at junction nodes they get to choose which branch.
-   
-   We represent the board as two rings + 2 spokes.
-   OUTER: 30 nodes  (indices 0..29)
-   INNER: 18 nodes  (indices 30..47)
-   Junctions at outer[0]↔inner[0], outer[8]↔inner[5], outer[15]↔inner[9], outer[23]↔inner[14]
-   = 4 spokes connecting at 4 points
-   ======================================================== */
-
-// Build board positions
-// Outer ring: 30 nodes, radius Ro
-// Inner ring: 18 nodes, radius Ri
-// 4 junction pairs connecting them
-const OUTER_N = 30;
-const INNER_N = 18;
-const TOTAL_NODES = OUTER_N + INNER_N; // 48
-
-// Outer categories cycling through 4 (+start at 0)
-function buildBoardCats(){
-  const cats=[];
-  const cycle=['patrulla','disney','superheroes','viajes'];
-  for(let i=0;i<OUTER_N;i++) cats.push(i===0?'start': i===7||i===22?'junction': cycle[i%4]);
-  for(let i=0;i<INNER_N;i++) cats.push(i===0||i===9?'junction': cycle[(i+1)%4]);
-  return cats;
+function buildCats(){
+  const c=[];
+  for(let i=0;i<OUTER_N;i++) c.push(i===0?'start': CATS4[i%4]);
+  for(let i=0;i<INNER_N;i++) c.push(i===0||i===2||i===4||i===6?'junction': CATS4[i%4]);
+  return c;
 }
-const BOARD_CATS=buildBoardCats();
+const NODE_CATS = buildCats();
 
-// Adjacency for each node: { fwd, bwd }  (circular)
-// Outer: 0↔1↔2...↔29↔0
-// Inner: 30↔31↔...↔47↔30
-// Spokes: outer7 ↔ inner30 ↔ ... outer22 ↔ inner39
-// Junction nodes have extra connections
+// Adjacency list (bi-directional)
 function buildGraph(){
-  const adj=Array.from({length:TOTAL_NODES},()=>new Set());
-  // Outer ring
-  for(let i=0;i<OUTER_N;i++){
-    const nxt=(i+1)%OUTER_N;
-    adj[i].add(nxt); adj[nxt].add(i);
-  }
-  // Inner ring
-  for(let i=0;i<INNER_N;i++){
-    const a=OUTER_N+i, b=OUTER_N+((i+1)%INNER_N);
-    adj[a].add(b); adj[b].add(a);
-  }
-  // 4 spokes (junctions)
-  const spokes=[[7,OUTER_N+0],[15,OUTER_N+5],[22,OUTER_N+9],[0,OUTER_N+14]];
-  spokes.forEach(([o,inn])=>{
-    adj[o].add(inn); adj[inn].add(o);
-  });
+  const adj=Array.from({length:TOTAL_N},()=>[]);
+  function link(a,b){adj[a].push(b);adj[b].push(a);}
+  // Outer ring (circular)
+  for(let i=0;i<OUTER_N;i++) link(i,(i+1)%OUTER_N);
+  // Inner ring (circular)
+  for(let i=0;i<INNER_N;i++) link(OUTER_N+i, OUTER_N+(i+1)%INNER_N);
+  // 4 spokes
+  link(0,  OUTER_N+0);
+  link(4,  OUTER_N+2);
+  link(8,  OUTER_N+4);
+  link(12, OUTER_N+6);
   return adj;
 }
-const GRAPH=buildGraph();
+const GRAPH = buildGraph();
 
-/* ========================================================
+const CAT_DEF={
+  start:   {color:'#FFD93D',fill:'rgba(255,217,61,.18)', emoji:'🏠',label:'Salida'},
+  junction:{color:'#FF6B9D',fill:'rgba(255,107,157,.18)',emoji:'🔀',label:'Cruce'},
+  patrulla:{color:'#FF6B35',fill:'rgba(255,107,53,.18)', emoji:'🐾',label:'Patrulla Canina'},
+  disney:  {color:'#4ECDC4',fill:'rgba(78,205,196,.18)', emoji:'✨',label:'Disney'},
+  superheroes:{color:'#A29BFE',fill:'rgba(162,155,254,.18)',emoji:'🦸',label:'Superhéroes'},
+  viajes:  {color:'#FFD93D',fill:'rgba(255,217,61,.14)', emoji:'🌍',label:'Viajes'},
+};
+
+/* ════════════════════════════════════════════
    QUESTIONS
-   ======================================================== */
+   ════════════════════════════════════════════ */
 const QUESTIONS={
   patrulla:[
     {cat:'patrulla',img:'👦',label:'Patrulla Canina',
@@ -393,7 +364,7 @@ const QUESTIONS={
      answers_adult:['Policía y espía','Bombero','Marino','Piloto'],correct_adult:0,
      babyAnswers:[{emoji:'🔵',label:'Azul'},{emoji:'🔴',label:'Rojo'},{emoji:'🟢',label:'Verde'},{emoji:'🟡',label:'Amarillo'}]},
     {cat:'patrulla',img:'🚒',label:'Marshall',
-     q_kid:'¿Qué trabajo hace Marshall en la Patrulla?',
+     q_kid:'¿Qué trabajo hace Marshall?',
      q_adult:'Marshall es bombero y paramédico. ¿De qué raza es?',
      answers_kid:['Bombero','Policía','Piloto','Marinero'],correct_kid:0,
      answers_adult:['Dálmata','Labrador','Husky','Bulldog'],correct_adult:0,
@@ -430,18 +401,12 @@ const QUESTIONS={
      babyAnswers:[{emoji:'🏗️',label:'Construye'},{emoji:'🚁',label:'Vuela'},{emoji:'🔥',label:'Fuego'},{emoji:'🤿',label:'Bucea'}]},
     {cat:'patrulla',img:'❄️',label:'Everest',
      q_kid:'¿Qué hace Everest en la Patrulla?',
-     q_adult:'Everest es el perro de montaña. ¿De qué raza es?',
+     q_adult:'Everest es la perra de montaña. ¿De qué raza es?',
      answers_kid:['Rescates en la nieve','Apaga fuegos','Es policía','Vuela'],correct_kid:0,
      answers_adult:['Husky siberiano','Labrador','Poodle','Collie'],correct_adult:0,
      babyAnswers:[{emoji:'❄️',label:'Nieve'},{emoji:'🔥',label:'Fuego'},{emoji:'🚔',label:'Policía'},{emoji:'🚁',label:'Vuela'}]},
-    {cat:'patrulla',img:'📱',label:'Collar PAW',
-     q_kid:'¿Qué usan los cachorros para hablar con Ryder?',
-     q_adult:'¿Cuántos cachorros forman la Patrulla Canina original?',
-     answers_kid:['Un collar especial','Un teléfono','Una carta','Un megáfono'],correct_kid:0,
-     answers_adult:['6','4','8','10'],correct_adult:0,
-     babyAnswers:[{emoji:'📱',label:'Collar'},{emoji:'☎️',label:'Teléfono'},{emoji:'✉️',label:'Carta'},{emoji:'📢',label:'Megáfono'}]},
     {cat:'patrulla',img:'🏖️',label:'Bahía Aventura',
-     q_kid:'¿En qué lugar vive la Patrulla Canina?',
+     q_kid:'¿Dónde vive la Patrulla Canina?',
      q_adult:'¿Cómo se llama el alcalde de Bahía Aventura?',
      answers_kid:['Bahía Aventura','Ciudad Arco Iris','Villa Feliz','Pueblo Canino'],correct_kid:0,
      answers_adult:['Alcalde Goodway','Alcalde Smith','Alcalde Ryder','Alcalde Fox'],correct_adult:0,
@@ -456,31 +421,31 @@ const QUESTIONS={
      babyAnswers:[{emoji:'🐠',label:'Nemo'},{emoji:'🐟',label:'Dory'},{emoji:'🐢',label:'Crush'},{emoji:'🦑',label:'Pearl'}]},
     {cat:'disney',img:'⛄',label:'Frozen',
      q_kid:'¿Cómo se llama el muñeco de nieve de Frozen?',
-     q_adult:'Frozen está ambientada en Arendelle. ¿Qué país nórdico la inspiró?',
+     q_adult:'¿Qué país nórdico inspiró el reino de Arendelle?',
      answers_kid:['Olaf','Kristoff','Hans','Sven'],correct_kid:0,
      answers_adult:['Noruega','Suecia','Dinamarca','Islandia'],correct_adult:0,
      babyAnswers:[{emoji:'⛄',label:'Olaf'},{emoji:'🧔',label:'Kristoff'},{emoji:'🤴',label:'Hans'},{emoji:'🦌',label:'Sven'}]},
     {cat:'disney',img:'🦁',label:'El Rey León',
      q_kid:'¿Qué animal es Simba?',
-     q_adult:'El Rey León está inspirado en la obra de Shakespeare. ¿Cuál?',
+     q_adult:'¿En qué obra de Shakespeare se inspira El Rey León?',
      answers_kid:['León','Tigre','Guepardo','Elefante'],correct_kid:0,
      answers_adult:['Hamlet','Macbeth','Romeo y Julieta','Otelo'],correct_adult:0,
      babyAnswers:[{emoji:'🦁',label:'León'},{emoji:'🐯',label:'Tigre'},{emoji:'🐆',label:'Guepardo'},{emoji:'🐘',label:'Elefante'}]},
     {cat:'disney',img:'🧸',label:'Toy Story',
      q_kid:'¿En qué película cobran vida los juguetes?',
-     q_adult:'Toy Story fue la primera película CGI. ¿En qué año se estrenó?',
+     q_adult:'¿En qué año se estrenó la primera película Toy Story?',
      answers_kid:['Toy Story','Cars','Up','Wall-E'],correct_kid:0,
      answers_adult:['1995','1998','2000','1993'],correct_adult:0,
      babyAnswers:[{emoji:'🧸',label:'Toy Story'},{emoji:'🚗',label:'Cars'},{emoji:'🎈',label:'Up'},{emoji:'🤖',label:'Wall-E'}]},
     {cat:'disney',img:'🧜‍♀️',label:'La Sirenita',
      q_kid:'¿Quién vive bajo el mar y quiere ser humana?',
-     q_adult:'La famosa estatua de la Sirenita está en una ciudad. ¿Cuál?',
+     q_adult:'¿En qué ciudad está la famosa estatua de La Sirenita?',
      answers_kid:['Ariel','Elsa','Moana','Bella'],correct_kid:0,
      answers_adult:['Copenhague','Oslo','Estocolmo','Helsinki'],correct_adult:0,
      babyAnswers:[{emoji:'🧜‍♀️',label:'Ariel'},{emoji:'❄️',label:'Elsa'},{emoji:'🌊',label:'Moana'},{emoji:'🌹',label:'Bella'}]},
-    {cat:'disney',img:'🏹',label:'Brave - Mérida',
+    {cat:'disney',img:'🏹',label:'Mérida - Brave',
      q_kid:'¿Qué princesa tiene pelo naranja rizado?',
-     q_adult:'Brave está ambientada en las Highlands. ¿De qué país?',
+     q_adult:'Brave se ambienta en las Highlands. ¿De qué país?',
      answers_kid:['Mérida','Ariel','Moana','Tiana'],correct_kid:0,
      answers_adult:['Escocia','Irlanda','Gales','Noruega'],correct_adult:0,
      babyAnswers:[{emoji:'🏹',label:'Mérida'},{emoji:'🧜‍♀️',label:'Ariel'},{emoji:'🌺',label:'Moana'},{emoji:'🐸',label:'Tiana'}]},
@@ -492,25 +457,25 @@ const QUESTIONS={
      babyAnswers:[{emoji:'🐻',label:'Baloo'},{emoji:'🐆',label:'Bagheera'},{emoji:'🐯',label:'Shere Khan'},{emoji:'🦧',label:'King Louie'}]},
     {cat:'disney',img:'👠',label:'Cenicienta',
      q_kid:'¿De qué están hechos los zapatos de Cenicienta?',
-     q_adult:'¿A qué hora Cenicienta debía regresar antes de que el hechizo se rompiera?',
+     q_adult:'¿A qué hora se rompía el hechizo de Cenicienta?',
      answers_kid:['De cristal','De oro','De plata','De madera'],correct_kid:0,
      answers_adult:['A medianoche','A las 11','Al amanecer','A las 10'],correct_adult:0,
      babyAnswers:[{emoji:'💎',label:'Cristal'},{emoji:'🟡',label:'Oro'},{emoji:'⚪',label:'Plata'},{emoji:'🪵',label:'Madera'}]},
     {cat:'disney',img:'❄️',label:'Elsa - Frozen',
      q_kid:'¿Qué puede crear Elsa con sus poderes?',
-     q_adult:'En Frozen 2, ¿a dónde viaja Elsa siguiendo una voz misteriosa?',
+     q_adult:'En Frozen 2, ¿adónde viaja Elsa siguiendo una voz?',
      answers_kid:['Hielo y nieve','Fuego','Plantas','Viento'],correct_kid:0,
      answers_adult:['Al bosque encantado','Al volcán','Al desierto','A una cueva'],correct_adult:0,
      babyAnswers:[{emoji:'❄️',label:'Hielo'},{emoji:'🔥',label:'Fuego'},{emoji:'🌿',label:'Plantas'},{emoji:'💨',label:'Viento'}]},
     {cat:'disney',img:'🐘',label:'Dumbo',
      q_kid:'¿Qué animal puede volar en la película Dumbo?',
-     q_adult:'¿Qué característica especial tiene Dumbo que le permite volar?',
+     q_adult:'¿Qué tiene Dumbo de especial que le permite volar?',
      answers_kid:['Un elefante','Un caballo','Un perro','Un pájaro'],correct_kid:0,
-     answers_adult:['Sus orejas enormes','Su trompa larga','Sus ojos mágicos','Su cola especial'],correct_adult:0,
+     answers_adult:['Sus orejas enormes','Su trompa','Sus ojos','Su cola'],correct_adult:0,
      babyAnswers:[{emoji:'🐘',label:'Elefante'},{emoji:'🐴',label:'Caballo'},{emoji:'🐶',label:'Perro'},{emoji:'🐦',label:'Pájaro'}]},
-    {cat:'disney',img:'🚀',label:'Buzz Lightyear',
-     q_kid:'¿De qué serie es el personaje Buzz Lightyear?',
-     q_adult:'¿Cuál es la frase icónica de Buzz Lightyear?',
+    {cat:'disney',img:'🚀',label:'Toy Story - Buzz',
+     q_kid:'¿De qué serie es Buzz Lightyear?',
+     q_adult:'¿Cuál es la frase famosa de Buzz Lightyear?',
      answers_kid:['Toy Story','Brave','Up','Cars'],correct_kid:0,
      answers_adult:['Hasta el infinito y más allá','Al infinito y más','Soy un guardián espacial','Vamos a las estrellas'],correct_adult:0,
      babyAnswers:[{emoji:'🧸',label:'Toy Story'},{emoji:'🏹',label:'Brave'},{emoji:'🎈',label:'Up'},{emoji:'🚗',label:'Cars'}]},
@@ -563,7 +528,7 @@ const QUESTIONS={
      q_adult:'¿Cuál es el nombre real de Iron Man?',
      answers_kid:['Rojo y dorado','Azul y plata','Negro y verde','Morado'],correct_kid:0,
      answers_adult:['Tony Stark','Bruce Banner','Steve Rogers','Peter Parker'],correct_adult:0,
-     babyAnswers:[{emoji:'🔴🟡',label:'Rojo/Dorado'},{emoji:'🔵⚪',label:'Azul/Plata'},{emoji:'⚫🟢',label:'Negro/Verde'},{emoji:'🟣',label:'Morado'}]},
+     babyAnswers:[{emoji:'🔴🟡',label:'Rojo/Oro'},{emoji:'🔵⚪',label:'Azul/Plata'},{emoji:'⚫🟢',label:'Negro/Verde'},{emoji:'🟣',label:'Morado'}]},
     {cat:'superheroes',img:'🐜',label:'Ant-Man',
      q_kid:'¿Qué superhéroe puede encogerse?',
      q_adult:'¿Cuál es el nombre real de Ant-Man?',
@@ -586,7 +551,7 @@ const QUESTIONS={
   viajes:[
     {cat:'viajes',img:'🗼',label:'París, Francia',
      q_kid:'¿En qué ciudad está la Torre Eiffel?',
-     q_adult:'¿Cuántos metros de altura tiene aproximadamente la Torre Eiffel?',
+     q_adult:'¿Cuántos metros de altura tiene la Torre Eiffel?',
      answers_kid:['París','Roma','Londres','Madrid'],correct_kid:0,
      answers_adult:['330 m','200 m','420 m','280 m'],correct_adult:0,
      babyAnswers:[{emoji:'🗼',label:'París'},{emoji:'🏛️',label:'Roma'},{emoji:'🎡',label:'Londres'},{emoji:'🌞',label:'Madrid'}]},
@@ -602,9 +567,9 @@ const QUESTIONS={
      answers_kid:['Japón','China','Corea','Vietnam'],correct_kid:0,
      answers_adult:['3.776 m','2.500 m','4.800 m','1.900 m'],correct_adult:0,
      babyAnswers:[{emoji:'🇯🇵',label:'Japón'},{emoji:'🇨🇳',label:'China'},{emoji:'🇰🇷',label:'Corea'},{emoji:'🇻🇳',label:'Vietnam'}]},
-    {cat:'viajes',img:'🏟️',label:'Roma',
+    {cat:'viajes',img:'🏟️',label:'Roma, Italia',
      q_kid:'¿En qué país está el Coliseo Romano?',
-     q_adult:'¿Para cuántas personas tenía capacidad el Coliseo Romano?',
+     q_adult:'¿Para cuántas personas tenía capacidad el Coliseo?',
      answers_kid:['Italia','Grecia','España','Portugal'],correct_kid:0,
      answers_adult:['50.000','20.000','100.000','10.000'],correct_adult:0,
      babyAnswers:[{emoji:'🇮🇹',label:'Italia'},{emoji:'🇬🇷',label:'Grecia'},{emoji:'🇪🇸',label:'España'},{emoji:'🇵🇹',label:'Portugal'}]},
@@ -616,7 +581,7 @@ const QUESTIONS={
      babyAnswers:[{emoji:'🇪🇬',label:'Egipto'},{emoji:'🇸🇦',label:'Arabia'},{emoji:'🇲🇦',label:'Marruecos'},{emoji:'🇹🇷',label:'Turquía'}]},
     {cat:'viajes',img:'🦁',label:'Sabana africana',
      q_kid:'¿En qué continente viven los leones salvajes?',
-     q_adult:'¿En qué reserva keniata culmina la Gran Migración de ñus?',
+     q_adult:'¿En qué reserva keniata culmina la Gran Migración?',
      answers_kid:['África','Asia','América','Europa'],correct_kid:0,
      answers_adult:['Masái Mara','Serengeti','Amboseli','Tsavo'],correct_adult:0,
      babyAnswers:[{emoji:'🌍',label:'África'},{emoji:'🌏',label:'Asia'},{emoji:'🌎',label:'América'},{emoji:'🗺️',label:'Europa'}]},
@@ -628,22 +593,10 @@ const QUESTIONS={
      babyAnswers:[{emoji:'🟠',label:'Naranja'},{emoji:'🔴',label:'Rojo'},{emoji:'🔵',label:'Azul'},{emoji:'⬜',label:'Gris'}]},
     {cat:'viajes',img:'🎡',label:'Londres',
      q_kid:'¿En qué ciudad está el Big Ben?',
-     q_adult:'¿Cómo se llama realmente la torre que alberga el Big Ben?',
+     q_adult:'¿Cómo se llama realmente la torre del Big Ben?',
      answers_kid:['Londres','París','Berlín','Ámsterdam'],correct_kid:0,
      answers_adult:['Torre Isabel','Torre del Parlamento','Torre Victoria','Torre de Londres'],correct_adult:0,
      babyAnswers:[{emoji:'🇬🇧',label:'Londres'},{emoji:'🇫🇷',label:'París'},{emoji:'🇩🇪',label:'Berlín'},{emoji:'🇳🇱',label:'Ámsterdam'}]},
-    {cat:'viajes',img:'🏔️',label:'Los Alpes',
-     q_kid:'¿En qué continente están los Alpes?',
-     q_adult:'¿Entre qué dos países hace frontera el Mont Blanc?',
-     answers_kid:['Europa','América','Asia','África'],correct_kid:0,
-     answers_adult:['Francia e Italia','Suiza y Austria','España y Francia','Italia y Alemania'],correct_adult:0,
-     babyAnswers:[{emoji:'🌍',label:'Europa'},{emoji:'🌎',label:'América'},{emoji:'🌏',label:'Asia'},{emoji:'🌍',label:'África'}]},
-    {cat:'viajes',img:'🌊',label:'Maldivas',
-     q_kid:'¿De qué color es el agua en las playas tropicales?',
-     q_adult:'¿Cuál es la mayor amenaza para las Maldivas?',
-     answers_kid:['Azul turquesa','Gris','Verde oscuro','Marrón'],correct_kid:0,
-     answers_adult:['Subida del nivel del mar','Terremotos','Volcanes','Huracanes'],correct_adult:0,
-     babyAnswers:[{emoji:'🔵',label:'Azul'},{emoji:'⬜',label:'Gris'},{emoji:'🟢',label:'Verde'},{emoji:'🟫',label:'Marrón'}]},
     {cat:'viajes',img:'🍕',label:'Italia',
      q_kid:'¿En qué país se inventó la pizza?',
      q_adult:'¿En qué ciudad italiana nació la pizza Margherita?',
@@ -654,14 +607,32 @@ const QUESTIONS={
      q_kid:'¿En qué país están las ruinas mayas?',
      q_adult:'¿Cuál es la pirámide maya más famosa de Chichén Itzá?',
      answers_kid:['México','Brasil','Argentina','Colombia'],correct_kid:0,
-     answers_adult:['El Castillo (Kukulcán)','La Gran Pirámide','Templo del Sol','Pirámide de la Luna'],correct_adult:0,
+     answers_adult:['El Castillo (Kukulcán)','Gran Pirámide','Templo del Sol','Pirámide de la Luna'],correct_adult:0,
      babyAnswers:[{emoji:'🇲🇽',label:'México'},{emoji:'🇧🇷',label:'Brasil'},{emoji:'🇦🇷',label:'Argentina'},{emoji:'🇨🇴',label:'Colombia'}]},
+    {cat:'viajes',img:'🏔️',label:'Los Alpes',
+     q_kid:'¿En qué continente están los Alpes?',
+     q_adult:'¿Entre qué dos países hace frontera el Mont Blanc?',
+     answers_kid:['Europa','América','Asia','África'],correct_kid:0,
+     answers_adult:['Francia e Italia','Suiza y Austria','España y Francia','Italia y Alemania'],correct_adult:0,
+     babyAnswers:[{emoji:'🌍',label:'Europa'},{emoji:'🌎',label:'América'},{emoji:'🌏',label:'Asia'},{emoji:'🌍',label:'África'}]},
   ]
 };
 
-/* ========================================================
+/* ════════════════════════════════════════════
+   AVATARS & HELPERS
+   ════════════════════════════════════════════ */
+const AVATARS=[
+  {emoji:'🐕',bg:'#9A3D00'},{emoji:'⭐',bg:'#8A6800'},{emoji:'🌈',bg:'#1B5E20'},
+  {emoji:'🦋',bg:'#880E4F'},{emoji:'🚀',bg:'#311B92'},{emoji:'🦊',bg:'#7C2D00'},
+];
+const ga=i=>`background:${AVATARS[i%AVATARS.length].bg}`;
+const ge=i=>AVATARS[i%AVATARS.length].emoji;
+const ft=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+const DICE_FACES=['⚀','⚁','⚂','⚃','⚄','⚅'];
+
+/* ════════════════════════════════════════════
    STATE
-   ======================================================== */
+   ════════════════════════════════════════════ */
 let state={
   players:[],
   selectedCats:['patrulla','disney','superheroes','viajes'],
@@ -675,20 +646,21 @@ let state={
   paused:false,
   diceValue:0,
   diceRolled:false,
+  validTargets:[],      // node indices the player can reach
 };
 
-/* ========================================================
+/* ════════════════════════════════════════════
    SCREEN
-   ======================================================== */
+   ════════════════════════════════════════════ */
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-'+id).classList.add('active');
   if(id==='board') setTimeout(drawBoard,40);
 }
 
-/* ========================================================
-   INIT PLAYERS
-   ======================================================== */
+/* ════════════════════════════════════════════
+   INIT
+   ════════════════════════════════════════════ */
 function initDefaultPlayers(){
   state.players=[
     {name:'Nereo',avatarIdx:3,score:0,correct:0,total:0,mode:'kid', pos:0},
@@ -697,9 +669,9 @@ function initDefaultPlayers(){
   ];
 }
 
-/* ========================================================
+/* ════════════════════════════════════════════
    WELCOME UI
-   ======================================================== */
+   ════════════════════════════════════════════ */
 function renderPlayerList(){
   const list=document.getElementById('playerList');
   list.innerHTML='';
@@ -728,7 +700,6 @@ function renderPlayerList(){
   list.querySelectorAll('.player-avatar').forEach(av=>av.addEventListener('click',e=>{const i=+e.target.dataset.idx;state.players[i].avatarIdx=(state.players[i].avatarIdx+1)%AVATARS.length;renderPlayerList();}));
   list.querySelectorAll('.mode-pill').forEach(pill=>pill.addEventListener('click',e=>{state.players[+e.target.dataset.idx].mode=e.target.dataset.mode;renderPlayerList();}));
 }
-
 document.getElementById('addPlayerBtn').addEventListener('click',()=>{
   if(state.players.length>=6)return;
   state.players.push({name:'',avatarIdx:state.players.length,score:0,correct:0,total:0,mode:'kid',pos:0});
@@ -745,22 +716,22 @@ document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',
   else{state.selectedCats.push(cat);btn.classList.add('selected');}
 }));
 
-/* ========================================================
+/* ════════════════════════════════════════════
    START GAME
-   ======================================================== */
+   ════════════════════════════════════════════ */
 document.getElementById('startGameBtn').addEventListener('click',()=>{
   if(state.players.length<2){alert('¡Necesitáis al menos 2 jugadores!');return;}
   state.players.forEach(p=>{p.score=0;p.correct=0;p.total=0;p.pos=0;});
   state.currentPlayerIdx=0;state.timeLeft=state.gameTime*60;
   state.usedQ={patrulla:[],disney:[],superheroes:[],viajes:[]};
-  state.answered=false;state.paused=false;state.diceValue=0;state.diceRolled=false;
+  state.answered=false;state.paused=false;state.diceValue=0;state.diceRolled=false;state.validTargets=[];
   showScreen('board');
   startTimer();updateBoardHeader();renderMiniScores();
 });
 
-/* ========================================================
+/* ════════════════════════════════════════════
    TIMER
-   ======================================================== */
+   ════════════════════════════════════════════ */
 function startTimer(){
   if(state.timerInterval)clearInterval(state.timerInterval);
   state.timerInterval=setInterval(()=>{
@@ -778,181 +749,204 @@ function updateTimerDisplays(){
   });
 }
 
-/* ========================================================
-   BOARD CANVAS
-   ======================================================== */
-let nodePositions=[];
-let nodeRadius=0;
+/* ════════════════════════════════════════════
+   BOARD CANVAS — positions
+   ════════════════════════════════════════════ */
+let nodePos=[];   // {x, y} for each node
+let nodeR=0;      // radius of each node circle
 
-function computePositions(W,H){
+function computeNodePositions(W,H){
   const cx=W/2, cy=H/2;
-  const Ro=Math.min(W,H)*0.40; // outer ring radius
-  const Ri=Math.min(W,H)*0.22; // inner ring radius
-  nodeRadius=Math.min(W,H)*0.058;
+  const Ro=Math.min(W,H)*0.40;  // outer ring radius
+  const Ri=Math.min(W,H)*0.20;  // inner ring radius
+  // Node circle radius: large enough to tap comfortably
+  nodeR=Math.min(W*0.085, H*0.085, 38);
 
-  nodePositions=[];
-  // Outer ring: 30 nodes
+  nodePos=[];
   for(let i=0;i<OUTER_N;i++){
     const a=(i/OUTER_N)*Math.PI*2 - Math.PI/2;
-    nodePositions.push({x:cx+Ro*Math.cos(a), y:cy+Ro*Math.sin(a)});
+    nodePos.push({x:cx+Ro*Math.cos(a), y:cy+Ro*Math.sin(a)});
   }
-  // Inner ring: 18 nodes
   for(let i=0;i<INNER_N;i++){
     const a=(i/INNER_N)*Math.PI*2 - Math.PI/2;
-    nodePositions.push({x:cx+Ri*Math.cos(a), y:cy+Ri*Math.sin(a)});
+    nodePos.push({x:cx+Ri*Math.cos(a), y:cy+Ri*Math.sin(a)});
   }
 }
 
+/* ════════════════════════════════════════════
+   DRAW BOARD
+   ════════════════════════════════════════════ */
 function drawBoard(){
   const canvas=document.getElementById('boardCanvas');
-  const area=canvas.parentElement;
+  const area=document.getElementById('boardArea');
   const W=area.clientWidth, H=area.clientHeight;
   canvas.width=W; canvas.height=H;
+  canvas.style.width=W+'px'; canvas.style.height=H+'px';
   const ctx=canvas.getContext('2d');
   ctx.clearRect(0,0,W,H);
 
-  computePositions(W,H);
+  computeNodePositions(W,H);
   const cx=W/2,cy=H/2;
+  const validSet=new Set(state.validTargets);
 
-  // ---- Draw edges ----
+  /* ── Track lines ── */
   ctx.save();
-  ctx.strokeStyle='rgba(255,255,255,0.07)';
-  ctx.lineWidth=2;
-
-  // Outer ring path
+  // Outer ring line
+  ctx.strokeStyle='rgba(255,255,255,0.08)';
+  ctx.lineWidth=3;
   ctx.beginPath();
-  nodePositions.slice(0,OUTER_N).forEach((p,i)=>{
-    i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);
-  });
+  nodePos.slice(0,OUTER_N).forEach((p,i)=>{i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);});
   ctx.closePath();ctx.stroke();
-
-  // Inner ring path
+  // Inner ring line
   ctx.beginPath();
-  nodePositions.slice(OUTER_N).forEach((p,i)=>{
-    i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);
-  });
+  nodePos.slice(OUTER_N).forEach((p,i)=>{i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y);});
   ctx.closePath();ctx.stroke();
-
-  // Spoke connections (bridges)
-  const spokes=[[7,OUTER_N+0],[15,OUTER_N+5],[22,OUTER_N+9],[0,OUTER_N+14]];
-  ctx.strokeStyle='rgba(255,107,157,0.3)';
-  ctx.lineWidth=2;
-  ctx.setLineDash([5,4]);
-  spokes.forEach(([o,inn])=>{
-    ctx.beginPath();
-    ctx.moveTo(nodePositions[o].x,nodePositions[o].y);
-    ctx.lineTo(nodePositions[inn].x,nodePositions[inn].y);
-    ctx.stroke();
+  // Spokes
+  ctx.strokeStyle='rgba(255,107,157,0.22)';
+  ctx.lineWidth=2;ctx.setLineDash([6,5]);
+  [[0,OUTER_N+0],[4,OUTER_N+2],[8,OUTER_N+4],[12,OUTER_N+6]].forEach(([o,inn])=>{
+    ctx.beginPath();ctx.moveTo(nodePos[o].x,nodePos[o].y);ctx.lineTo(nodePos[inn].x,nodePos[inn].y);ctx.stroke();
   });
   ctx.setLineDash([]);
   ctx.restore();
 
-  // ---- Center ----
-  const grad=ctx.createRadialGradient(cx,cy,0,cx,cy,Math.min(W,H)*0.18);
-  grad.addColorStop(0,'rgba(28,35,51,0.85)');
-  grad.addColorStop(1,'rgba(13,17,23,0.2)');
+  /* ── Center decoration ── */
+  const grad=ctx.createRadialGradient(cx,cy,0,cx,cy,Math.min(W,H)*0.15);
+  grad.addColorStop(0,'rgba(28,35,51,0.85)');grad.addColorStop(1,'rgba(13,17,23,0.1)');
   ctx.fillStyle=grad;
-  ctx.beginPath();ctx.arc(cx,cy,Math.min(W,H)*0.17,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(cx,cy,Math.min(W,H)*0.14,0,Math.PI*2);ctx.fill();
   ctx.save();
-  ctx.font=`bold ${Math.min(W,H)*0.045}px Fredoka One,cursive`;
-  ctx.fillStyle='rgba(255,255,255,0.11)';
-  ctx.textAlign='center';ctx.textBaseline='middle';
-  ctx.fillText('🌟 TRIVIAL',cx,cy-8);
-  ctx.font=`${Math.min(W,H)*0.026}px Nunito`;
-  ctx.fillStyle='rgba(255,255,255,0.06)';
-  ctx.fillText('¡Tira el dado!',cx,cy+14);
-  ctx.restore();
+  ctx.font=`bold ${Math.min(W,H)*0.038}px Fredoka One,cursive`;
+  ctx.fillStyle='rgba(255,255,255,0.1)';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('🌟 TRIVIAL',cx,cy-7);
+  ctx.font=`${Math.min(W,H)*0.024}px Nunito`;ctx.fillStyle='rgba(255,255,255,0.06)';
+  ctx.fillText('¡Tira el dado!',cx,cy+14);ctx.restore();
 
-  // ---- Draw nodes ----
-  for(let i=0;i<TOTAL_NODES;i++){
-    const {x,y}=nodePositions[i];
-    const cat=BOARD_CATS[i];
+  /* ── Draw nodes ── */
+  for(let i=0;i<TOTAL_N;i++){
+    const {x,y}=nodePos[i];
+    const cat=NODE_CATS[i];
     const cd=CAT_DEF[cat]||CAT_DEF.start;
+    const isValid=validSet.has(i);
     const hasPlayer=state.players.some(p=>p.pos===i);
+    const isCurrent=state.players[state.currentPlayerIdx]?.pos===i;
 
-    // Glow for nodes with players
-    if(hasPlayer){
+    /* Glow for valid targets */
+    if(isValid){
       ctx.save();
-      ctx.shadowBlur=18;ctx.shadowColor=cd.color;
+      ctx.shadowBlur=22;ctx.shadowColor=cd.color;
+      ctx.fillStyle='rgba(255,255,255,0)';
+      ctx.beginPath();ctx.arc(x,y,nodeR+8,0,Math.PI*2);ctx.fill();
       ctx.restore();
     }
 
-    // Node circle
+    /* Node fill */
     ctx.save();
-    if(hasPlayer){ctx.shadowBlur=14;ctx.shadowColor=cd.color;}
-    ctx.fillStyle=cd.light;
+    if(isValid){ctx.shadowBlur=16;ctx.shadowColor=cd.color;}
+    else if(hasPlayer){ctx.shadowBlur=10;ctx.shadowColor=cd.color;}
+    ctx.fillStyle=isValid?cd.fill.replace(/[\d.]+\)$/,'0.35)'):cd.fill;
     ctx.strokeStyle=cd.color;
-    ctx.lineWidth=hasPlayer?2.5:1.5;
-    ctx.beginPath();ctx.arc(x,y,nodeRadius,0,Math.PI*2);
-    ctx.fill();ctx.stroke();
+    ctx.lineWidth=isValid?3.5:hasPlayer?2.5:1.5;
+    ctx.globalAlpha=isValid?1:0.82;
+    ctx.beginPath();ctx.arc(x,y,nodeR,0,Math.PI*2);ctx.fill();ctx.stroke();
     ctx.restore();
 
-    // Emoji
+    /* Pulsing ring for valid targets */
+    if(isValid){
+      const pulse=0.5+0.5*Math.sin(Date.now()/300+i);
+      ctx.save();
+      ctx.strokeStyle=cd.color;
+      ctx.lineWidth=2.5;
+      ctx.globalAlpha=0.35*pulse;
+      ctx.beginPath();ctx.arc(x,y,nodeR+10,0,Math.PI*2);ctx.stroke();
+      ctx.restore();
+    }
+
+    /* Category emoji */
     ctx.save();
-    ctx.font=`${nodeRadius*0.78}px serif`;
+    ctx.font=`${nodeR*0.8}px serif`;
     ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText(cd.emoji,x,y-nodeRadius*0.1);
+    ctx.globalAlpha=isValid?1:0.75;
+    ctx.fillText(cd.emoji,x,y-nodeR*0.06);
     ctx.restore();
 
-    // Number label (small)
+    /* Number label */
     ctx.save();
-    ctx.font=`bold ${nodeRadius*0.38}px Nunito`;
-    ctx.fillStyle='rgba(255,255,255,0.45)';
+    ctx.font=`bold ${nodeR*0.36}px Nunito`;
+    ctx.fillStyle=isValid?'rgba(255,255,255,0.9)':'rgba(255,255,255,0.4)';
     ctx.textAlign='center';ctx.textBaseline='middle';
-    const label=i<OUTER_N?(cat==='start'?'S':String(i+1)):`i${i-OUTER_N+1}`;
-    ctx.fillText(label,x,y+nodeRadius*0.52);
+    const lbl=i<OUTER_N?(cat==='start'?'🏠':String(i+1)):('•');
+    ctx.fillText(lbl,x,y+nodeR*0.55);
     ctx.restore();
   }
 
-  // ---- Draw player tokens ----
+  /* ── Player tokens ── */
   state.players.forEach((pl,pi)=>{
-    const {x,y}=nodePositions[pl.pos];
-    // Spread tokens at same node
-    const samePosPlayers=state.players.filter(p=>p.pos===pl.pos);
-    const myIdx=samePosPlayers.indexOf(pl);
-    const spread=nodeRadius*0.35;
-    const angle=samePosPlayers.length>1?(myIdx/(samePosPlayers.length-1))*Math.PI*2:0;
-    const tx=samePosPlayers.length>1?x+Math.cos(angle)*spread*0.7:x;
-    const ty=samePosPlayers.length>1?y+Math.sin(angle)*spread*0.7:y;
-    const r=nodeRadius*0.38;
+    const {x,y}=nodePos[pl.pos];
+    const same=state.players.filter(p=>p.pos===pl.pos);
+    const myI=same.indexOf(pl);
+    const off=same.length>1?nodeR*0.38:0;
+    const ang=same.length>1?(myI/same.length)*Math.PI*2:0;
+    const tx=x+Math.cos(ang)*off, ty=y+Math.sin(ang)*off;
+    const tr=nodeR*0.36;
 
-    ctx.save();
-    ctx.shadowBlur=10;ctx.shadowColor='rgba(0,0,0,.7)';
+    ctx.save();ctx.shadowBlur=12;ctx.shadowColor='rgba(0,0,0,.8)';
     ctx.fillStyle=AVATARS[pl.avatarIdx%AVATARS.length].bg;
-    ctx.beginPath();ctx.arc(tx,ty,r,0,Math.PI*2);ctx.fill();
-    ctx.restore();
+    ctx.beginPath();ctx.arc(tx,ty,tr,0,Math.PI*2);ctx.fill();ctx.restore();
 
     ctx.save();
-    ctx.strokeStyle=pi===state.currentPlayerIdx?'#FFD93D':'rgba(255,255,255,.35)';
-    ctx.lineWidth=pi===state.currentPlayerIdx?2.5:1.5;
-    ctx.beginPath();ctx.arc(tx,ty,r,0,Math.PI*2);ctx.stroke();
-    ctx.restore();
+    ctx.strokeStyle=pi===state.currentPlayerIdx?'#FFD93D':'rgba(255,255,255,.3)';
+    ctx.lineWidth=pi===state.currentPlayerIdx?3:1.5;
+    ctx.beginPath();ctx.arc(tx,ty,tr,0,Math.PI*2);ctx.stroke();ctx.restore();
 
-    ctx.save();
-    ctx.font=`${r*1.1}px serif`;
+    ctx.save();ctx.font=`${tr*1.1}px serif`;
     ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText(ge(pl.avatarIdx),tx,ty);
-    ctx.restore();
+    ctx.fillText(ge(pl.avatarIdx),tx,ty);ctx.restore();
   });
+
+  /* ── Animate if targets shown ── */
+  if(state.validTargets.length>0) requestAnimationFrame(drawBoard);
 }
 
-/* ========================================================
-   BOARD HEADER & MINI SCORES
-   ======================================================== */
+/* ════════════════════════════════════════════
+   COMPUTE VALID TARGETS
+   BFS from current position, exactly `steps` moves
+   (or fewer if junction — optional: for simplicity
+   we compute all nodes reachable in exactly `steps`
+   steps along the graph, in any direction)
+   ════════════════════════════════════════════ */
+function computeValidTargets(startPos, steps){
+  // BFS/DFS to find all nodes reachable in exactly `steps` steps
+  // (path can go either direction, cannot revisit same edge consecutively)
+  const results=new Set();
+  function dfs(node,prev,remaining){
+    if(remaining===0){results.add(node);return;}
+    for(const nb of GRAPH[node]){
+      if(nb===prev && remaining>0 && remaining<steps) continue; // avoid immediate backtrack (allow at start)
+      dfs(nb,node,remaining-1);
+    }
+  }
+  dfs(startPos,-1,steps);
+  results.delete(startPos); // can't stay
+  return [...results];
+}
+
+/* ════════════════════════════════════════════
+   BOARD HEADER & SCORES
+   ════════════════════════════════════════════ */
 function updateBoardHeader(){
   const p=state.players[state.currentPlayerIdx];
-  const av=document.getElementById('bhAv');
-  av.style.cssText=ga(p.avatarIdx);av.textContent=ge(p.avatarIdx);
+  document.getElementById('bhAv').style.cssText=ga(p.avatarIdx);
+  document.getElementById('bhAv').textContent=ge(p.avatarIdx);
   document.getElementById('bhName').textContent=(p.name||'Jugador')+(p.mode==='baby'?' 👶':p.mode==='adult'?' 🎓':'');
-  document.getElementById('bhHint').textContent=state.diceRolled?`Mueve ${state.diceValue} casilla${state.diceValue>1?'s':''} — elige dirección`:'Tira el dado';
+  document.getElementById('bhHint').textContent=state.diceRolled?'👆 Toca una casilla iluminada':'🎲 Tira el dado';
   document.getElementById('dpName').textContent=p.name||'Jugador';
-  document.getElementById('dpHint').textContent=state.diceRolled?`Elige dirección ◀ ▶`:'Toca el dado para tirar';
+  document.getElementById('dpHint').textContent=state.diceRolled?`Toca tu casilla (${state.diceValue} pasos)`:'Toca el dado para tirar';
   document.getElementById('diceBtn').classList.toggle('used',state.diceRolled);
   if(!state.diceRolled) document.getElementById('diceNum').textContent='?';
-  // Show/hide direction buttons
-  document.getElementById('dirBtns').style.display=state.diceRolled?'flex':'none';
+  const hint=document.getElementById('pickHint');
+  hint.style.display=state.diceRolled?'block':'none';
 }
-
 function renderMiniScores(){
   const ms=document.getElementById('miniScores');ms.innerHTML='';
   state.players.forEach((p,i)=>{
@@ -963,9 +957,9 @@ function renderMiniScores(){
   });
 }
 
-/* ========================================================
+/* ════════════════════════════════════════════
    DICE
-   ======================================================== */
+   ════════════════════════════════════════════ */
 const diceBtn=document.getElementById('diceBtn');
 diceBtn.addEventListener('click',()=>{
   if(state.diceRolled||state.paused)return;
@@ -973,116 +967,108 @@ diceBtn.addEventListener('click',()=>{
   state.diceValue=val;
   state.diceRolled=true;
   diceBtn.classList.add('rolling');
-  const faces=['⚀','⚁','⚂','⚃','⚄','⚅'];
-  diceBtn.textContent=faces[val-1];
+  diceBtn.textContent=DICE_FACES[val-1];
   document.getElementById('diceNum').textContent=val;
   setTimeout(()=>diceBtn.classList.remove('rolling'),450);
-  showToast(val);
+
+  // Compute and show valid targets
+  const p=state.players[state.currentPlayerIdx];
+  state.validTargets=computeValidTargets(p.pos, val);
   updateBoardHeader();
+  showToast(val);
+  drawBoard(); // starts animation loop
 });
 
 function showToast(n,msg){
   const t=document.createElement('div');t.className='toast';
-  t.innerHTML=`<div class="tn">${n}</div><div class="tt">${msg||`Mueve ${n} casilla${n>1?'s':''}`}</div>`;
+  t.innerHTML=`<div class="tn">${n}</div><div class="tt">${msg||`¡Mueve ${n} casilla${n>1?'s':''} — toca dónde ir!`}</div>`;
   document.body.appendChild(t);
-  setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity .4s';setTimeout(()=>t.remove(),400);},1600);
+  setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity .4s';setTimeout(()=>t.remove(),400);},1800);
 }
 
-/* ========================================================
-   MOVEMENT — Player moves along graph
-   ======================================================== */
-// Move player n steps in given direction (+1 fwd / -1 bwd)
-// At each step the next node is chosen from adjacency
-// (preference: continue same ring direction)
-function movePlayer(direction){
-  if(!state.diceRolled||state.paused)return;
-  const p=state.players[state.currentPlayerIdx];
-  let steps=state.diceValue;
-  let cur=p.pos;
-  let prevNode=-1;
+/* ════════════════════════════════════════════
+   CANVAS TAP → MOVE
+   ════════════════════════════════════════════ */
+function handleBoardTap(clientX,clientY){
+  if(!state.diceRolled||state.paused||!state.validTargets.length) return;
+  const canvas=document.getElementById('boardCanvas');
+  const rect=canvas.getBoundingClientRect();
+  const mx=clientX-rect.left, my=clientY-rect.top;
 
-  while(steps>0){
-    const neighbors=[...GRAPH[cur]].filter(n=>n!==prevNode);
-    if(!neighbors.length) break;
-
-    // On ring nodes: prefer ring neighbors
-    // fwd = higher index on same ring (wrapping); bwd = lower
-    let next;
-    if(cur<OUTER_N){
-      // outer ring
-      const fwdN=(cur+1)%OUTER_N;
-      const bwdN=(cur-1+OUTER_N)%OUTER_N;
-      if(direction===1 && neighbors.includes(fwdN)) next=fwdN;
-      else if(direction===-1 && neighbors.includes(bwdN)) next=bwdN;
-      else next=neighbors[0];
-    } else {
-      // inner ring
-      const rel=cur-OUTER_N;
-      const fwdN=OUTER_N+((rel+1)%INNER_N);
-      const bwdN=OUTER_N+((rel-1+INNER_N)%INNER_N);
-      if(direction===1 && neighbors.includes(fwdN)) next=fwdN;
-      else if(direction===-1 && neighbors.includes(bwdN)) next=bwdN;
-      else next=neighbors[0];
-    }
-    prevNode=cur;
-    cur=next;
-    steps--;
+  // Find nearest valid node within tap radius
+  const TAP_R=nodeR*1.6; // generous tap area
+  let best=-1, bestD=Infinity;
+  state.validTargets.forEach(idx=>{
+    const {x,y}=nodePos[idx];
+    const d=Math.hypot(mx-x,my-y);
+    if(d<TAP_R && d<bestD){bestD=d;best=idx;}
+  });
+  if(best<0){
+    // Tapped wrong place — flash hint
+    const hint=document.getElementById('pickHint');
+    hint.style.color='#FF4757';
+    setTimeout(()=>{hint.style.color='';},600);
+    return;
   }
+  landOnNode(best);
+}
 
-  p.pos=cur;
+document.getElementById('boardCanvas').addEventListener('click',e=>handleBoardTap(e.clientX,e.clientY));
+document.getElementById('boardCanvas').addEventListener('touchend',e=>{
+  e.preventDefault();
+  if(e.changedTouches.length>0) handleBoardTap(e.changedTouches[0].clientX,e.changedTouches[0].clientY);
+},{passive:false});
+
+/* ════════════════════════════════════════════
+   LAND ON NODE
+   ════════════════════════════════════════════ */
+function landOnNode(idx){
+  const p=state.players[state.currentPlayerIdx];
+  p.pos=idx;
   state.diceRolled=false;
-  const faces=['⚀','⚁','⚂','⚃','⚄','⚅'];
+  state.validTargets=[];
   diceBtn.textContent='🎲';
   document.getElementById('diceNum').textContent='?';
-  document.getElementById('dirBtns').style.display='none';
   updateBoardHeader();
   renderMiniScores();
   drawBoard();
 
-  // Land on node
-  const cat=BOARD_CATS[cur];
+  const cat=NODE_CATS[idx];
   if(cat==='start'){
-    p.score++;renderMiniScores();
+    p.score++;renderMiniScores();drawBoard();
     showToast('🏠','¡Salida! +1 🧀');
-    setTimeout(advanceTurn,1800);
+    setTimeout(advanceTurn,1900);
   } else if(cat==='junction'){
-    showToast('🔀','¡Cruce! Sigue moviendo');
-    setTimeout(advanceTurn,1800);
+    showToast('🔀','¡Cruce! Siguiente turno');
+    setTimeout(advanceTurn,1900);
   } else if(state.selectedCats.includes(cat)){
-    setTimeout(()=>openQuestion(cat),400);
+    setTimeout(()=>openQuestion(cat),350);
   } else {
     advanceTurn();
   }
 }
 
-document.getElementById('btnLeft').addEventListener('click',()=>movePlayer(-1));
-document.getElementById('btnRight').addEventListener('click',()=>movePlayer(1));
-
-/* ========================================================
+/* ════════════════════════════════════════════
    QUESTIONS
-   ======================================================== */
+   ════════════════════════════════════════════ */
 function getQ(cat){
-  const pool=QUESTIONS[cat];
-  if(!pool||!pool.length)return null;
+  const pool=QUESTIONS[cat]; if(!pool?.length) return null;
   let avail=pool.map((_,i)=>i).filter(i=>!state.usedQ[cat].includes(i));
   if(!avail.length){state.usedQ[cat]=[];avail=pool.map((_,i)=>i);}
-  const ri=avail[Math.floor(Math.random()*avail.length)];
+  const ri=avail[~~(Math.random()*avail.length)];
   state.usedQ[cat].push(ri);
   return {...pool[ri]};
 }
-
 function openQuestion(cat){
-  const q=getQ(cat);if(!q)return advanceTurn();
-  state.currentQ=q;state.answered=false;
+  const q=getQ(cat); if(!q) return advanceTurn();
+  state.currentQ=q; state.answered=false;
   const p=state.players[state.currentPlayerIdx];
-  document.getElementById('qAv').style.cssText=ga(p.avatarIdx);
-  document.getElementById('qAv').textContent=ge(p.avatarIdx);
+  document.getElementById('qAv').style.cssText=ga(p.avatarIdx);document.getElementById('qAv').textContent=ge(p.avatarIdx);
   document.getElementById('qPname').textContent=p.name||'Jugador';
   document.getElementById('qPmode').textContent=p.mode==='baby'?'👶 Modo bebé':p.mode==='adult'?'🎓 Modo adulto':'🧒 Modo niño';
   renderQuestion(q,p.mode);
   showScreen('question');
 }
-
 function renderQuestion(q,mode){
   const area=document.getElementById('qArea');
   const cd=CAT_DEF[q.cat];
@@ -1091,15 +1077,13 @@ function renderQuestion(q,mode){
   const answers=isAdult?q.answers_adult:q.answers_kid;
   const correct=isAdult?q.correct_adult:q.correct_kid;
   const shuffled=[0,1,2,3].sort(()=>Math.random()-.5);
-
   area.innerHTML=`
-    <div class="q-cat" style="background:${cd.light};color:${cd.color}">${cd.emoji} ${cd.label}</div>
+    <div class="q-cat" style="background:${cd.fill};color:${cd.color}">${cd.emoji} ${cd.label}</div>
     ${isBaby?'<div class="q-banner baby">👶 Modo bebé — ¡Toca la imagen!</div>':''}
     ${isAdult?'<div class="q-banner adult">🎓 Pregunta avanzada</div>':''}
     <div class="q-img"><span class="qem">${q.img}</span><div class="qlbl">${q.label}</div></div>
     <div class="q-text">${qText}</div>
     <div class="${isBaby?'a-grid-baby':'a-grid'}" id="answersGrid"></div>`;
-
   const grid=document.getElementById('answersGrid');
   shuffled.forEach((origIdx,pos)=>{
     const btn=document.createElement('button');
@@ -1115,13 +1099,11 @@ function renderQuestion(q,mode){
     grid.appendChild(btn);
   });
 }
-
 function handleAnswer(btn,selectedIdx,correctIdx){
   if(state.answered)return;
   state.answered=true;
   const player=state.players[state.currentPlayerIdx];
-  player.total++;
-  const ok=selectedIdx===correctIdx;
+  player.total++;const ok=selectedIdx===correctIdx;
   document.querySelectorAll('.a-btn,.a-btn-baby').forEach(b=>{
     b.disabled=true;
     if(+b.dataset.origIdx===correctIdx)b.classList.add('correct');
@@ -1131,9 +1113,9 @@ function handleAnswer(btn,selectedIdx,correctIdx){
   setTimeout(()=>showFeedback(ok,player),680);
 }
 
-/* ========================================================
+/* ════════════════════════════════════════════
    FEEDBACK
-   ======================================================== */
+   ════════════════════════════════════════════ */
 function showFeedback(ok,player){
   if(ok){player.score++;renderMiniScores();}
   const ov=document.createElement('div');ov.className='fb-ov';
@@ -1151,19 +1133,16 @@ function showFeedback(ok,player){
   document.getElementById('nextBtn').addEventListener('click',()=>{ov.remove();advanceTurn();showScreen('board');});
   if(ok)launchConfetti();
 }
-
 function advanceTurn(){
   state.currentPlayerIdx=(state.currentPlayerIdx+1)%state.players.length;
-  state.diceRolled=false;
-  diceBtn.textContent='🎲';
-  document.getElementById('diceNum').textContent='?';
-  document.getElementById('dirBtns').style.display='none';
+  state.diceRolled=false;state.validTargets=[];
+  diceBtn.textContent='🎲';document.getElementById('diceNum').textContent='?';
   updateBoardHeader();renderMiniScores();drawBoard();
 }
 
-/* ========================================================
-   CONFETTI
-   ======================================================== */
+/* ════════════════════════════════════════════
+   CONFETTI / PAUSE / END
+   ════════════════════════════════════════════ */
 function launchConfetti(){
   const cls=['#FFD93D','#FF6B9D','#6BCB77','#4ECDC4','#A29BFE','#FF8C42'];
   for(let i=0;i<30;i++){
@@ -1172,10 +1151,6 @@ function launchConfetti(){
     document.body.appendChild(c);c.addEventListener('animationend',()=>c.remove());
   }
 }
-
-/* ========================================================
-   PAUSE
-   ======================================================== */
 document.getElementById('pauseBtn').addEventListener('click',()=>{
   state.paused=true;
   const ov=document.createElement('div');ov.className='pause-ov';
@@ -1186,16 +1161,12 @@ document.getElementById('pauseBtn').addEventListener('click',()=>{
   document.getElementById('resumeBtn').addEventListener('click',()=>{state.paused=false;ov.remove();});
   document.getElementById('endEarlyBtn').addEventListener('click',()=>{ov.remove();endGame();});
 });
-
-/* ========================================================
-   END GAME
-   ======================================================== */
 function endGame(){
   if(state.timerInterval)clearInterval(state.timerInterval);
+  state.validTargets=[];
   showScreen('results');renderResults();
   setTimeout(launchConfetti,300);setTimeout(launchConfetti,900);
 }
-
 function renderResults(){
   const sorted=[...state.players].sort((a,b)=>b.score-a.score||b.correct-a.correct);
   const pO=sorted.length>=3?[sorted[1],sorted[0],sorted[2]]:sorted.length===2?[sorted[1],sorted[0]]:[sorted[0]];
@@ -1219,13 +1190,10 @@ function renderResults(){
       <div class="result-score">🧀 ${p.score}</div>
     </div>`).join('');
 }
-
 document.getElementById('playAgainBtn').addEventListener('click',()=>{showScreen('welcome');initDefaultPlayers();renderPlayerList();});
 window.addEventListener('resize',()=>{if(document.getElementById('screen-board').classList.contains('active'))drawBoard();});
 
-/* ========================================================
-   INIT
-   ======================================================== */
+/* INIT */
 initDefaultPlayers();
 renderPlayerList();
 state.gameTime=60;
